@@ -1,0 +1,203 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.lateral-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--purple);
+    width: 10%;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 3rem 1rem;
+    row-gap: 2rem;
+}
+
+.user__image {
+    width: 150px;
+    height: auto;
+    border-radius: 150px;
+    border: 5px solid white;
+}
+
+.user__profile, .your-stocks {
+    text-decoration: none;
+    margin-bottom: 2rem;
+}
+
+.user__name, .your-stocks__text {
+    color: var(--white);
+    font-family: var(--text-font);
+    font-size: 1.3rem;
+    margin-top: .5rem;
+}
+
+
+.logout {
+    margin-bottom: 2rem;
+}
+
+.logout__text {
+    color: var(--white);
+    font-family: var(--text-font);
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.your-stocks__icon {
+    width: 100px;
+}
+
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--lightgray);
+    width: 100%;
+}
+
+.dashboard__title {
+    display: flex;
+    align-items: center;
+    margin: 4rem 4rem 2rem 4rem;
+}
+
+.dashboard__title_txt {
+    font-family: var(--title-font);
+    font-size: 4rem;
+    color: var(--purple);
+}
+
+.stock-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    width: 350px;
+    height: 350px;
+    margin: 2rem 2rem 2rem 4rem;
+    border-radius: 20px;
+    box-shadow: 7px 7px 5px #b3b3b3;
+    flex-wrap: wrap;
+}
+
+.stock-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stock-card__line1 {
+    display: flex;
+    height: 50%;
+    align-items: center;
+    justify-content: center ;
+    text-align: center;
+}
+
+.stock-card__company_logo {
+    text-align: center;
+    width:100px;
+    height: auto;
+    padding: 1rem;
+}
+
+.stock-card__company_data {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    text-align: center;
+    width: 60%;
+}
+
+.stock-card__company_name {
+    font-family: var(--title-font);
+    font-size: 1.5rem;
+    padding: .5rem;
+    color: var(--purple);
+}
+
+.stock-card__company_website {
+    font-family: var(--text-font);
+    color: var(--gray);
+    font-size: 1rem;
+}
+
+.stock-card__symbol{
+    font-family: var(--text-font);
+    color: var(--gray);
+    font-size: 1.5rem;
+}
+
+.stock-card__line2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 25%;
+}
+
+.stock-card__current_value {
+    font-family: var(--text-font);
+    color: var(--gray);
+    font-size: 1.5rem;
+    border: 1px solid lightgray;
+    width: 30%;
+    padding: 1.5rem;
+}
+
+.stock-card__variation-up {
+    display: flex;
+    font-family: var(--text-font);
+    color: var(--green);
+    font-size: 1.5rem;
+    border: 1px solid lightgray;
+    width: 30%;
+    padding: 1.5rem;
+}
+
+.arrow-up {
+    width: 15px;
+    color: var(--green);
+    margin-left: 1rem;
+    filter: invert(47%) sepia(87%) saturate(415%) hue-rotate(51deg) brightness(89%) contrast(88%);
+}
+
+.arrow-down {
+    width: 15px;
+    color: var(--red);
+    margin-left: 1rem;
+    filter: invert(18%) sepia(38%) saturate(7005%) hue-rotate(353deg) brightness(90%) contrast(89%);
+}
+
+.stock-card__variation-down {
+    display: flex;
+    font-family: var(--text-font);
+    color: var(--red);
+    font-size: 1.5rem;
+    border: 1px solid lightgray;
+    width: 30%;
+    padding: 1.5rem;
+}
+
+.stock-card__line3 {
+    display: flex;
+    height: 25%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.stock-card__link {
+    text-decoration: none;
+    font-family: var(--title-font);
+    font-size: 1.5rem;
+    color: var(--purple);
+}

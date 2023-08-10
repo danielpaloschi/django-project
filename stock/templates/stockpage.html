@@ -1,0 +1,134 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js" integrity="sha512-5vwN8yor2fFT9pgPS9p9R7AszYaNn0LkQElTXIsZFCL7ucT8zDCAqlQXDdaqgA1mZP47hdvztBMsIoFxq/FyyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>StockPage</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/stockpage.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+    <section class="main">
+        <div class="lateral-menu">
+            <div class="user">
+                <a class="user__profile" href="#">
+                    <img class="user__image" src="/static/images/danielolhando.jpg" alt="#">
+                    <h2 class="user__name">Daniel Paloschi</h2>
+                </a>
+                <a class="your-stocks" href="{% url 'stock:dashboard' %}">
+                    <img class="your-stocks__icon" src="/static/images/white-layer.png" alt="">
+                    <p class="your-stocks__text">Yours Stocks</p>
+                </a>
+            </div>
+            <div class="logout">
+                <a class="logout__text" href="#"> Logout ></a>
+            </div>
+        </div>
+
+        <div class="stockpage">
+
+            <div class="stockpage__title">
+                <h2 class="stockpage__title_txt">Stock</h2>
+                <hr class="stockpage__title_line">
+                <img class="stockpage__title_logo" src="{{ object.logo.url }}" alt="">
+            </div>
+
+            <div class="stockpage__graph">
+                <div class="stockpage__graph__line1">
+                    <div class="stockpage__graph__line1-data">
+                        <h2 class="stockpage__graph__line1-data-title">{{ object.company_name }}</h2>
+                        <div class="stockpage__graph__line1-data-values">
+                            <p class="stockpage__current_value">U${{ stock.current_value|floatformat:2 }}</p>
+                            {% if object.market_change > 0 %}
+                            <div class="stockpage__variation-up">
+                                <p>{{ object.market_change|floatformat:2 }}%</p>
+                                <img class="arrow-up" src="/static/images/up-long-solid.svg" alt="">
+                            </div>
+                            {% else %}
+                            <div class="stockpage__variation-down">
+                                <p>{{ object.market_change|floatformat:2 }}%</p>
+                                <img class="arrow-down" src="/static/images/down-long-solid.svg" alt="">
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="get_data_stock_button">
+                        <form method="post" action="{% url 'stock:get-data-stock' object.pk %}">
+                            {% csrf_token %}
+                            <button type="submit">Atualizar Dados</button>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="stockpage__graph__line2">
+                    <div id="container" style="width: 75%;">
+                        <canvas id="population-chart" data-url="{% url 'stock:linechart' object.pk %}"></canvas>
+                      </div>
+
+                      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+                      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+                      <script>
+
+                        $(function () {
+
+                          var $populationChart = $("#population-chart");
+                          $.ajax({
+                            url: $populationChart.data("url"),
+                            success: function (data) {
+
+                              var ctx = $populationChart[0].getContext("2d");
+
+                              new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                  labels: data.labels,
+                                  datasets: [{
+                                    label: 'Population',
+                                    backgroundColor: 'blue',
+                                    data: data.data
+                                  }]
+                                },
+                                options: {
+                                  responsive: true,
+                                  legend: {
+                                    position: 'top',
+                                  },
+                                  title: {
+                                    display: true,
+                                    text: 'Population Bar Chart'
+                                  }
+                                }
+                              });
+
+                            }
+                          });
+
+                        });
+
+                      </script>
+                </div>
+            </div>
+            <div class="stockpage__infos">
+                <div class="stockpage__about">
+
+                </div>
+
+                <div class="stockpage__news">
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

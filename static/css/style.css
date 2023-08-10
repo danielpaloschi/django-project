@@ -1,0 +1,16 @@
+@import url("reset.css");
+@import url("dashboard.css");
+@import url("stockpage.css");
+
+:root {
+    --purple: #8E2DBA;
+    --gray: #878787;
+    --black: #000000;
+    --white: #FFFFFF;
+    --green: #53961F;
+    --red: #c21c1c;
+    --lightgray: #f1f1f1;
+    --title-font: 'Montserrat', sans-serif;
+    --text-font: 'Poppins', sans-serif;
+    --gradient-color: linear-gradient(135deg, #3C96D2, #3DDEAE);
+}

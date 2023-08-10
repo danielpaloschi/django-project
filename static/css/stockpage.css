@@ -1,0 +1,142 @@
+.stockpage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--lightgray);
+    width: 100%;
+    height: 100vh;
+}
+
+.stockpage__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 4rem 2rem 4rem;
+}
+
+.stockpage__title_txt {
+    font-family: var(--title-font);
+    font-size: 4rem;
+    color: var(--purple);
+}
+
+.stockpage__title_line {
+    width: 70%;
+    height:2px;
+    background:var(--purple);
+}
+
+.stockpage__title_logo {
+    text-align: center;
+    width:100px;
+    height: auto;
+    padding: 1rem;
+    border: 2px solid lightgray;
+}
+
+.stockpage__graph {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white);
+    padding: 2rem;
+    margin: 0 4rem;
+    height: 45%;
+    border-radius: 20px;
+    box-shadow: 7px 7px 5px #b3b3b3;
+}
+
+.stockpage__graph__line1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height:20%;
+    padding: 2rem;
+}
+
+.stockpage__graph__line1-data-button {
+    text-decoration: none;
+    font-family: var(--title-font);
+    color: var(--white);
+    font-size: 2rem;
+    padding: 2rem;
+    border-radius: 100%;
+    background-color: var(--green);
+}
+
+.stockpage__graph__line1-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.stockpage__graph__line1-data-title {
+    font-family: var(--title-font);
+    color: var(--gray);
+    font-size: 2rem;
+}
+
+.stockpage__graph__line1-data-values {
+    display: flex;
+    column-gap: 4rem;
+    align-items: baseline;
+}
+
+.stockpage__current_value {
+    font-family: var(--title-font);
+    color: var(--black);
+    font-size: 3rem;
+    width: 30%;
+    margin: 1.5rem 1.5rem 1.5rem 0;
+}
+
+.stockpage__variation-up {
+    display: flex;
+    font-family: var(--title-font);
+    color: var(--green);
+    font-size: 1.5rem;
+    width: 30%;
+    margin: 1.5rem;
+}
+
+.stockpage__variation-down {
+    display: flex;
+    font-family: var(--title-font);
+    color: var(--red);
+    font-size: 1.5rem;
+    width: 30%;
+    margin: 1.5rem;
+}
+
+.stockpage__graph__line2 {
+    display: flex;
+    align-items: baseline;
+    width: 100%;
+    height: 50%
+}
+
+.stockpage__infos {
+    display: flex;
+    align-items: center;
+}
+
+.stockpage__about {
+    display: flex;
+    width: 50%;
+    height:400px;
+    background-color: var(--white);
+    border-radius: 20px;
+    box-shadow: 7px 7px 5px #b3b3b3;
+    padding: 2rem;
+    margin: 1rem 1rem 2rem 4rem;
+}
+
+.stockpage__news {
+    display: flex;
+    width: 50%;
+    height:400px;
+    background-color: var(--white);
+    border-radius: 20px;
+    box-shadow: 7px 7px 5px #b3b3b3;
+    padding: 2rem;
+    margin: 1rem 4rem 2rem 1rem;
+}

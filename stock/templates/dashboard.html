@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <section class="main">
+        <div class="lateral-menu">
+            <div class="user">
+                <a class="user__profile" href="#">
+                    <img class="user__image" src="/static/images/danielolhando.jpg" alt="#">
+                    <h2 class="user__name">Daniel Paloschi</h2>
+                </a>
+                <a class="your-stocks" href="{% url 'stock:dashboard' %}">
+                    <img class="your-stocks__icon" src="/static/images/white-layer.png" alt="">
+                    <p class="your-stocks__text">Yours Stocks</p>
+                </a>
+            </div>
+            <div class="logout">
+                <a class="logout__text" href="#"> Logout ></a>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="dashboard__title">
+                <h2 class="dashboard__title_txt">Dashboard</h2>
+                <form method="post" action="{% url 'stock:refresh-stock' %}">
+                    {% csrf_token %}
+                    <button type="submit">Atualizar Dados</button>
+                </form>
+            </div>
+
+
+            <div class="stock-cards">
+                {% for stock in stock_list %}
+                    <div class="stock-card">
+                        <div class="stock-card__line1">
+                            <img class="stock-card__company_logo" src="{{ stock.logo.url }}" alt="">
+                            <div class="stock-card__company_data">
+                                <h2 class="stock-card__company_name">{{ stock.company_name }}</h2>
+                                <p class="stock-card__company_website">{{ stock.company_website }}</p>
+                                <p class="stock-card__symbol">{{ stock.symbol }}</p>
+                            </div>
+                        </div>
+                        <div class="stock-card__line2">
+                            <p class="stock-card__current_value">U${{ stock.current_value|floatformat:2 }}</p>
+                            {% if stock.market_change > 0 %}
+                            <div class="stock-card__variation-up">
+                                <p>{{ stock.market_change|floatformat:2 }}%</p>
+                                <img class="arrow-up" src="/static/images/up-long-solid.svg" alt="">
+                            </div>
+                            {% else %}
+                            <div class="stock-card__variation-down">
+                                <p>{{ stock.market_change|floatformat:2 }}%</p>
+                                <img class="arrow-down" src="/static/images/down-long-solid.svg" alt="">
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="stock-card__line3">
+                            <a class="stock-card__link" href="{% url 'stock:stockpage' stock.pk %}">Ver mais</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
