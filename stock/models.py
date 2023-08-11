@@ -1,6 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+# Stock model
 class Stock(models.Model):
     company_name = models.CharField(max_length=100, default='')
     logo = models.ImageField(upload_to="stock_logos", default=None)
@@ -19,10 +20,15 @@ class Stock(models.Model):
     def __str__(self):
         return self.company_name
 
+
 class DayDataStock(models.Model):
       stock = models.ForeignKey(Stock, related_name="day_data_id", on_delete=models.CASCADE)
       date_value = models.DateField()
       close_value = models.FloatField(default=0)
 
       def __str__(self):
-           return self.symbol
+           return self.stock
+
+#user
+class User(AbstractUser):
+    user_stocks = models.ManyToManyField("Stock")

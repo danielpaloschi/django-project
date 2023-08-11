@@ -1,16 +1,16 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js" integrity="sha512-5vwN8yor2fFT9pgPS9p9R7AszYaNn0LkQElTXIsZFCL7ucT8zDCAqlQXDdaqgA1mZP47hdvztBMsIoFxq/FyyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <title>StockPage</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/stockpage.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <title>StockPage</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins&display=swap" rel="stylesheet">
@@ -32,7 +32,7 @@
                 </a>
             </div>
             <div class="logout">
-                <a class="logout__text" href="#"> Logout ></a>
+                <a class="logout__text" href="{% url 'stock:logout' %}?next=/"> Logout ></a>
             </div>
         </div>
 
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="get_data_stock_button">
-                        <form method="post" action="{% url 'stock:get-data-stock' object.pk %}">
+                        <form method="post" action="{% url 'stock:day-data-stock' object.pk %}">
                             {% csrf_token %}
                             <button type="submit">Atualizar Dados</button>
                         </form>
@@ -72,51 +72,33 @@
                     </div>
                 </div>
                 <div class="stockpage__graph__line2">
-                    <div id="container" style="width: 75%;">
-                        <canvas id="population-chart" data-url="{% url 'stock:linechart' object.pk %}"></canvas>
-                      </div>
-
-                      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-                      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-                      <script>
-
-                        $(function () {
-
-                          var $populationChart = $("#population-chart");
-                          $.ajax({
-                            url: $populationChart.data("url"),
-                            success: function (data) {
-
-                              var ctx = $populationChart[0].getContext("2d");
-
-                              new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                  labels: data.labels,
+                  <canvas id="linechart"></canvas>
+                        <script>
+                              $(document).ready(function(){
+                                var ctx = document.getElementById('linechart').getContext('2d');
+                                const labels = [{%for data in day_data%}'{{data.date_value|date}}',{%endfor%}];
+                                const data = {
+                                  labels: labels,
                                   datasets: [{
-                                    label: 'Population',
-                                    backgroundColor: 'blue',
-                                    data: data.data
+                                    label: 'Historic Stock Price',
+                                    data: [{%for data in day_data%}'{{data.close_value|floatformat:2}}',{%endfor%}],
+                                    fill: false,
+                                    borderColor: 'rgba(142, 45, 186, 1)',
+                                    tension: 0.1,
+                                    backgroundColor: 'rgba(142, 45, 186, 1)',
                                   }]
-                                },
-                                options: {
-                                  responsive: true,
-                                  legend: {
-                                    position: 'top',
-                                  },
-                                  title: {
-                                    display: true,
-                                    text: 'Population Bar Chart'
-                                  }
-                                }
-                              });
+                                };
+                                console.log(labels, data)
+                                const config = {
+                                  type: 'line',
+                                  data: data,
+                                };
 
-                            }
-                          });
-
-                        });
-
-                      </script>
+                                ctx.canvas.style.width = '100%';
+                                ctx.canvas.style.height = '100%';
+                                new Chart(ctx, config)
+                            });
+                    </script>
                 </div>
             </div>
             <div class="stockpage__infos">

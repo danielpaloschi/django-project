@@ -111,7 +111,7 @@
     display: flex;
     align-items: baseline;
     width: 100%;
-    height: 50%
+    height: 65%
 }
 
 .stockpage__infos {
@@ -139,4 +139,9 @@
     box-shadow: 7px 7px 5px #b3b3b3;
     padding: 2rem;
     margin: 1rem 4rem 2rem 1rem;
+}
+
+#linechart {
+    width: 100%;
+    height: 100%;
 }

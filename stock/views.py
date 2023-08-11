@@ -1,17 +1,24 @@
+from typing import Any, Dict
 import requests
 from django.shortcuts import render, redirect
 from .models import Stock, DayDataStock
-from django.views.generic import ListView, View, DetailView, TemplateView
+from django.views.generic import ListView, View, DetailView, TemplateView, FormView
 from datetime import datetime, date
 from django.db.models import Q
 from django.urls import reverse
 from django.http import JsonResponse
+from .forms import CreateAccountForm
+
 
 
 
 URL_API = "https://yfapi.net"
 
 # Create your views here.
+
+class HomePage(TemplateView):
+    template_name = "homepage.html"
+
 class Dashboard(ListView):
     template_name = "dashboard.html"
     model = Stock
@@ -71,29 +78,21 @@ class StockPage(DetailView):
     template_name = 'stockpage.html'
     model = Stock
 
-def lineChart(self, request, pk, *args, **kwargs):
-
-    labels = []
-    data = []
-    day_data = DayDataStock.objects.filter(stock_id=pk).order_by('date_value')
-
-
-    for value in day_data:
-        labels.append(value.date_value)
-        data.append(value.close_value)
-
-    return JsonResponse(data = {
-        'labels': labels,
-        'data': data,
-    }), redirect(reverse('stock:stockpage', kwargs={'pk': kwargs['pk']}))
+    def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            pk = self.kwargs['pk']
+            stock = Stock.objects.get(pk=pk)
+            labels = []
+            data = []
+            day_data = DayDataStock.objects.filter(stock_id=stock).order_by('date_value')
 
 
-
-
+            context["day_data"] = day_data
+            return context
 
 class GetDataChart(View):
 
-    def get_api_day_data(self):
+    def get_api_day_data(self, *args, **kwargs):
         pk = self.kwargs['pk']
         stock = Stock.objects.get(pk=pk)
         ticker = stock.symbol
@@ -123,7 +122,6 @@ class GetDataChart(View):
     def post(self, request, *args, **kwargs):
         day_stock_data = self.get_api_day_data()
 
-
         for (stock_date, stock_close) in zip(day_stock_data["timestamp"], day_stock_data["indicators"]["quote"][0]["close"]):
             stock_date_todate = datetime.fromtimestamp(stock_date)
             stock_date_formated = stock_date_todate.date().strftime('%Y-%m-%d')
@@ -142,3 +140,14 @@ class GetDataChart(View):
                 )
 
         return redirect(reverse('stock:stockpage', kwargs={'pk': kwargs['pk']}))
+
+class CreateAccount(FormView):
+    template_name= "createaccount.html"
+    form_class = CreateAccountForm
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('stock:login')

@@ -1,0 +1,35 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="main_homepage">
+
+        <header class="header_homepage">
+            <img class="header_homepage__logo" src="/static/images/laptop.png" alt="">
+            <a class="header_homepage__login" href="{% url 'stock:login' %}">Login</a>
+        </header>
+
+        <section class="homepage_content">
+            <h1 class="homepage_content__title">Stock Stalker</h1>
+            <p class="homepage_content__text">Know exactly the best time to buy your favorite shares. Our technology uses data science and lots of crazy things you would never understand to make you (and us) rich!</p>
+            <img class="homepage_content__img" src="/static/images/pngegg.png" alt="">
+            <a class="homepage_content__button" href="{% url 'stock:createaccount' %}">Get Started</a>
+        </section>
+
+        <footer class="homepage_footer">
+            <p class="homepage_footer__text">Developed by Daniel Paloschi</p>
+        </footer>
+    </section>
+</body>
+</html>
