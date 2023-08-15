@@ -13,6 +13,7 @@ class Stock(models.Model):
     symbol = models.CharField(max_length=10, default='')
     growth_indicator = models.BooleanField(default=True)
     market_change = models.FloatField(default=0)
+    buy_recomendation = models.CharField(default="Atualize os Dados")
 
     def get_pk(self):
          return self.pk
@@ -26,9 +27,7 @@ class DayDataStock(models.Model):
       date_value = models.DateField()
       close_value = models.FloatField(default=0)
 
-      def __str__(self):
-           return self.stock
-
 #user
 class User(AbstractUser):
-    user_stocks = models.ManyToManyField("Stock")
+    stocks_symbols = models.CharField(default="AAPL,MSFT,GOOG,AMZN,NVDA,META,TSLA,JPM,JNJ,WMT")
+    profile_pic = models.ImageField(upload_to="profile_pic", blank=True)

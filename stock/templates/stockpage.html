@@ -22,9 +22,17 @@
     <section class="main">
         <div class="lateral-menu">
             <div class="user">
-                <a class="user__profile" href="#">
-                    <img class="user__image" src="/static/images/danielolhando.jpg" alt="#">
-                    <h2 class="user__name">Daniel Paloschi</h2>
+                <a class="user__profile" href="{% url 'stock:editprofile' user.pk %}">
+                    {% if request.user.profile_pic is blank %}
+                    <img class="user__image" src="/static/images/blank-profile-picture-973460_960_720.webp" alt="#">
+                    {% else %}
+                    <img class="user__image" src="{{ request.user.profile_pic.url }}" alt="#">
+                    {% endif %}
+                    {% if request.user.first_name is Null %}
+                    <h2 class="user__name">{{ request.user.username }}</h2>
+                    {% else %}
+                    <h2 class="user__name">{{ request.user.first_name }}</h2>
+                    {% endif %}
                 </a>
                 <a class="your-stocks" href="{% url 'stock:dashboard' %}">
                     <img class="your-stocks__icon" src="/static/images/white-layer.png" alt="">
@@ -41,7 +49,11 @@
             <div class="stockpage__title">
                 <h2 class="stockpage__title_txt">Stock</h2>
                 <hr class="stockpage__title_line">
+                {% if object.logo.url is not Null %}
                 <img class="stockpage__title_logo" src="{{ object.logo.url }}" alt="">
+                {% else %}
+                <img class="stockpage__title_logo" src="/static/images/nasdaq1512.jpg" alt="">
+                {% endif %}
             </div>
 
             <div class="stockpage__graph">
@@ -63,10 +75,10 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="get_data_stock_button">
+                    <div>
                         <form method="post" action="{% url 'stock:day-data-stock' object.pk %}">
                             {% csrf_token %}
-                            <button type="submit">Atualizar Dados</button>
+                            <button class="stockpage__graph__line1-data-button" type="submit">Atualizar Dados</button>
                         </form>
 
                     </div>
@@ -102,8 +114,22 @@
                 </div>
             </div>
             <div class="stockpage__infos">
-                <div class="stockpage__about">
-
+                {% if object.buy_recomendation == "Buy" %}
+                <div class="stockpage__about_buy">
+                {% elif object.buy_recomendation == "Sell" %}
+                <div class="stockpage__about_sell">
+                {% elif object.buy_recomendation == "Refresh Data"%}
+                <div class="stockpage__about_refresh"></div>
+                {% endif %}
+                    <div class="top-recomendation">
+                        <form method="post" action="{% url 'stock:getbuyrecomendation' object.pk %}">
+                            {% csrf_token %}
+                            <button class="buy_recomendation" type="submit">Refresh Recomendation</button>
+                        </form>
+                    </div>
+                    <div class="bottom-recomendation">
+                        <h1 class="buy_recomendation-text">{{ object.buy_recomendation }}</h1>
+                    </div>
                 </div>
 
                 <div class="stockpage__news">

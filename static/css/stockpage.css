@@ -55,13 +55,20 @@
 }
 
 .stockpage__graph__line1-data-button {
-    text-decoration: none;
-    font-family: var(--title-font);
+    text-decoration: None;
+    background-color: var(--purple);
+    padding: 1rem 2rem;
     color: var(--white);
-    font-size: 2rem;
-    padding: 2rem;
-    border-radius: 100%;
-    background-color: var(--green);
+    font-family: var(--title-font);
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    border: 0 solid;
+    margin-right: 2rem;
+}
+
+.stockpage__graph__line1-data-button:hover {
+    background-color: #9a45c2;
+    cursor: pointer;
 }
 
 .stockpage__graph__line1-data {
@@ -119,15 +126,34 @@
     align-items: center;
 }
 
-.stockpage__about {
+.stockpage__about_buy {
     display: flex;
+    flex-direction: column;
     width: 50%;
     height:400px;
-    background-color: var(--white);
+    background-color: var(--green);
     border-radius: 20px;
     box-shadow: 7px 7px 5px #b3b3b3;
     padding: 2rem;
     margin: 1rem 1rem 2rem 4rem;
+}
+
+.stockpage__about_sell {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height:400px;
+    background-color: var(--red);
+    border-radius: 20px;
+    box-shadow: 7px 7px 5px #b3b3b3;
+    padding: 2rem;
+    margin: 1rem 1rem 2rem 4rem;
+}
+
+.buy_recomendation-text {
+    font-family: var(--title-font);
+    font-size: 3rem;
+    color: var(--white);
 }
 
 .stockpage__news {
@@ -144,4 +170,31 @@
 #linechart {
     width: 100%;
     height: 100%;
+}
+
+.buy_recomendation {
+    text-decoration: None;
+    background-color: var(--white);
+    padding: 1rem 2rem;
+    color: var(--gray);
+    font-family: var(--title-font);
+    font-size: 1rem;
+    border-radius: 1rem;
+    border: 0 solid;
+}
+
+.buy_recomendation:hover {
+    cursor: pointer;
+}
+
+.top-recomendation {
+    height: 10%;
+}
+
+.bottom-recomendation {
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }

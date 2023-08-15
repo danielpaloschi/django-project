@@ -1,0 +1,63 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/editprofile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="main-editprofile">
+
+        <div class="lateral-menu">
+            <div class="user">
+                <a class="user__profile" href="{% url 'stock:editprofile' user.pk %}">
+                    {% if request.user.profile_pic is blank %}
+                    <img class="user__image" src="/static/images/blank-profile-picture-973460_960_720.webp" alt="#">
+                    {% else %}
+                    <img class="user__image" src="{{ request.user.profile_pic.url }}" alt="#">
+                    {% endif %}
+                    {% if request.user.first_name is Null %}
+                    <h2 class="user__name">{{ request.user.username }}</h2>
+                    {% else %}
+                    <h2 class="user__name">{{ request.user.first_name }}</h2>
+                    {% endif %}
+                </a>
+                <a class="your-stocks" href="{% url 'stock:dashboard' %}">
+                    <img class="your-stocks__icon" src="/static/images/white-layer.png" alt="">
+                    <p class="your-stocks__text">Yours Stocks</p>
+                </a>
+            </div>
+            <div class="logout">
+                <a class="logout__text" href="{% url 'stock:logout' %}?next=/"> Logout ></a>
+            </div>
+        </div>
+
+        <div class="edit-profile-data">
+            <div class="login-box">
+                <h2 class="login-title">Stock Stolker</h2>
+                <form method="post" class="edit-profile-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Edit the fields below to edit your profile</legend>
+                         {{ form|crispy }}
+                    </fieldset>
+                    <button class="bg-red-600 py-1 px-3 text-white md:text-lg rounded-md" type="submit">Edit Profile</button>
+                </form>
+                {{object.user_stocks.all}}
+            </div>
+        </div>
+
+
+    </section>
+
+
+</body>
+</html>

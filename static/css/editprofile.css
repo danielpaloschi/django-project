@@ -1,0 +1,84 @@
+.main-editprofile {
+    display: flex;
+    height: 100vh;
+    background-color: var(--lightgray);
+}
+
+.edit-profile-data {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: transparent;
+    width: 100%;
+}
+
+.login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 2rem;
+}
+
+.login-title {
+    font-size: 2rem;
+    font-family: var(--title-font);
+    color: var(--purple);
+    margin-bottom: 1rem;
+}
+
+/* Edit profile form styles */
+.edit-profile-form {
+    width: 100%;
+    max-width: 400px;
+    font-family: var(--text-font);
+}
+
+.edit-profile-form legend {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--purple);
+    font-family: var(--text-font);
+}
+
+.edit-profile-form label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-family: var(--text-font);
+}
+
+.edit-profile-form input[type="text"],
+.edit-profile-form input[type="email"],
+.edit-profile-form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    padding: 0.5rem 0 0.5rem 0;
+    font-family: var(--text-font);
+}
+
+.edit-profile-form button[type="submit"] {
+    background-color: var(--purple);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.edit-profile-form button[type="submit"]:hover {
+    background-color: #9145b4;
+    width: 100%;
+}

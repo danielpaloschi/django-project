@@ -4,6 +4,7 @@
 @import url("homepage.css");
 @import url("/static/css/login.css");
 @import url("/static/css/createaccount.css");
+@import url("/static/css/editprofile.css");
 
 :root {
     --purple: #8E2DBA;

@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 
 fields = list(UserAdmin.fieldsets)
 fields.append(
-    ("Stocks", {'fields': ('user_stocks',)})
+    ("Stocks", {'fields': ('stocks_symbols','profile_pic',)})
 )
 UserAdmin.fieldsets = tuple(fields)
 
@@ -13,3 +13,4 @@ UserAdmin.fieldsets = tuple(fields)
 admin.site.register(Stock)
 admin.site.register(DayDataStock)
 admin.site.register(User, UserAdmin)
+#
