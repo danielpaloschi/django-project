@@ -64,8 +64,16 @@ class RefreshStockView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         symbols = request.user.stocks_symbols
-        user_symbols = symbols.strip().upper()
-        stock_data = self.get_api_data(symbols)
+        new_symbols = []
+        print(symbols)
+        user_symbols = symbols.split(",")
+        for symbol in user_symbols:
+            symbol = symbol.strip().upper()
+            new_symbols.append(symbol)
+        print(user_symbols)
+        new_user_symbols = ",".join(new_symbols)
+        print(user_symbols)
+        stock_data = self.get_api_data(new_user_symbols)
 
         for data in stock_data:
             symbol = data['symbol']
@@ -86,11 +94,7 @@ class RefreshStockView(LoginRequiredMixin, View):
                     market_change = data["regularMarketChangePercent"]
                 )
 
-        user_stocks_list = symbols.split(",")
-        user_stocks = [stock.strip().upper() for stock in user_stocks_list]
 
-        print(user_symbols)
-        print(user_stocks)
 
         return redirect('stock:dashboard')
 

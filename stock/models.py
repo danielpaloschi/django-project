@@ -13,7 +13,7 @@ class Stock(models.Model):
     symbol = models.CharField(max_length=10, default='')
     growth_indicator = models.BooleanField(default=True)
     market_change = models.FloatField(default=0)
-    buy_recomendation = models.CharField(default="Atualize os Dados")
+    buy_recomendation = models.CharField(default="Refresh Data")
 
     def get_pk(self):
          return self.pk

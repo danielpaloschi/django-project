@@ -19,15 +19,15 @@
         <div class="lateral-menu">
             <div class="user">
                 <a class="user__profile" href="{% url 'stock:editprofile' user.pk %}">
-                    {% if request.user.profile_pic is blank %}
-                    <img class="user__image" src="/static/images/blank-profile-picture-973460_960_720.webp" alt="#">
-                    {% else %}
+                    {% if request.user.profile_pic %}
                     <img class="user__image" src="{{ request.user.profile_pic.url }}" alt="#">
-                    {% endif %}
-                    {% if request.user.first_name is Null %}
-                    <h2 class="user__name">{{ request.user.username }}</h2>
                     {% else %}
+                    <img class="user__image" src="/static/images/blank-profile-picture-973460_960_720.webp" alt="#">
+                    {% endif %}
+                    {% if request.user.first_name %}
                     <h2 class="user__name">{{ request.user.first_name }}</h2>
+                    {% else %}
+                    <h2 class="user__name">{{ request.user.username }}</h2>
                     {% endif %}
                 </a>
                 <a class="your-stocks" href="{% url 'stock:dashboard' %}">
